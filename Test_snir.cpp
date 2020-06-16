@@ -213,7 +213,7 @@ TEST_CASE("Test Compress")
     result = {1,7,11,20};
     j = 0;
     vector<bool> tftftft {true,false,true,false,true,false,true};
-    for (auto i: compress(vector({1,3,7,10,11,16,20}), tftftft)) )
+    for (auto i: compress(vector({1,3,7,10,11,16,20}), tftftft) )
     {
         CHECK(i == result.at(j));
         ++j;
