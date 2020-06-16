@@ -213,7 +213,8 @@ TEST_CASE("Test Compress")
     result = {1,7,11,20};
     j = 0;
     vector<bool> tftftft {true,false,true,false,true,false,true};
-    for (auto i: compress(vector({1,3,7,10,11,16,20}), tftftft) )
+    vector<int> v1 {1,3,7,10,11,16,20};
+    for (auto i: compress(v1, tftftft) )
     {
         CHECK(i == result.at(j));
         ++j;
@@ -256,7 +257,8 @@ TEST_CASE("Test Compress")
     CHECK(j != 19);
     CHECK(j != 20);
     vector<bool> tfffttttttt {true,false,false,false,true,true,true,true,true,true,true};
-    for (auto i: compress(string("InotLoveC++"), tfffttttttt) )
+    string s1 {"InotLoveC++"};
+    for (auto i: compress(s1, tfffttttttt) )
     {
         //CHECK(resultString.at(j) == i);
         ++j;
