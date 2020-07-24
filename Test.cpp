@@ -77,13 +77,15 @@ TEST_CASE("Test FilterFalse"){
     }
 
     //the same but odd
-     vector<int> result1 = {6,8};
-    int j = 0;
-    for (auto i: filterfalse([](int i){return i%2!=0;}, range(5,9)) )
+    vector<int> result2 = {5,7};
+    j = 0;
+    range r59(5,9);
+    for (auto i: filterfalse([](int i){return i%2==0;}, r59) )
     {
-        CHECK(i == result.at(j));
+        CHECK(i == result2.at(j));
         ++j;
     }
+    CHECK(j == 2);
 
 
 }
@@ -98,4 +100,65 @@ TEST_CASE("Test compress"){
     for (auto i : compress(range1, b)) {
         CHECK(i%2 == 1);
     }
+}
+
+TEST_CASE("Test Compress")
+{
+    vector<int> result = {7};
+    int j = 0;
+    vector<bool> fftf {false,false,true,false};
+    for (auto i: compress(range(5,9), fftf) )  {
+        CHECK(i == result.at(j));
+        ++j;
+    }
+    CHECK(j == 1);
+
+    result.clear();
+    j = 0;
+
+    result = {1,7,11,20};
+    j = 0;
+    vector<int> myvec = {1,3,7,10,11,16,20};
+    vector<bool> tftftft {true,false,true,false,true,false,true};
+    for (auto i: compress(myvec, tftftft) )
+    {
+        CHECK(i == result.at(j));
+        ++j;
+    }
+    CHECK(j == 4);
+
+
+    result.clear();
+    j = 0;
+
+    vector<char> resultString = {'I','L', 'o', 'v', 'e', 'C', '+','+'};
+    j = 0;
+
+    vector<bool> tfffttttttt {true,false,false,false,true,true,true,true,true,true,true};
+    string s1 {"InotLoveC++"};
+    for (auto i: compress(s1, tfffttttttt)) {
+        CHECK(resultString.at(j) == i);
+        ++j;
+    }
+    CHECK(j == 8);
+
+
+
+    j = 0;
+
+    vector<bool> myVectorBool2 {false,false,false,false,false,false,false,false,false,false,false};
+    
+    for (auto i: compress(string("InotLoveC++"), myVectorBool2))
+    {
+        CHECK(0==1); // not need to get in
+        ++j;
+    }
+    CHECK(j == 0);
+
+
+
+    result.clear();
+    j = 0;
+
+
 }
